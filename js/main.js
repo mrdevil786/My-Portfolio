@@ -1,28 +1,33 @@
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Navbar animation on load
+    const navbar = document.querySelector('nav');
+    setTimeout(() => {
+        navbar.classList.remove('translate-y-[-100%]');
+    }, 500);
+
     // Mobile menu functionality
     const menuBtn = document.getElementById('menu-btn');
-    const closeBtn = document.getElementById('close-menu');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuContent = mobileMenu.querySelector('div');
 
     function toggleMenu() {
-        const isHidden = mobileMenu.classList.contains('hidden');
-        mobileMenu.classList.toggle('hidden');
+        const isHidden = mobileMenu.classList.contains('pointer-events-none');
         
         if (isHidden) {
             // Show menu
-            mobileMenuContent.classList.remove('translate-x-full');
+            mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
+            mobileMenuContent.classList.remove('-translate-y-full');
             document.body.style.overflow = 'hidden';
         } else {
             // Hide menu
-            mobileMenuContent.classList.add('translate-x-full');
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+            mobileMenuContent.classList.add('-translate-y-full');
             document.body.style.overflow = '';
         }
     }
 
     menuBtn.addEventListener('click', toggleMenu);
-    closeBtn.addEventListener('click', toggleMenu);
     mobileMenu.addEventListener('click', (e) => {
         if (e.target === mobileMenu) {
             toggleMenu();
