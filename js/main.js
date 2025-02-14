@@ -118,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Update both desktop and mobile menu links
                 const allNavLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
                 allNavLinks.forEach(link => {
                     link.classList.remove('text-blue-600', 'dark:text-blue-400');
@@ -126,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 const activeId = entry.target.id;
-                // Select links in both desktop and mobile menu
                 const activeLinks = document.querySelectorAll(`nav a[href="#${activeId}"], #mobile-menu a[href="#${activeId}"]`);
                 activeLinks.forEach(activeLink => {
                     activeLink.classList.remove('text-gray-600', 'dark:text-gray-300');
@@ -154,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Update both desktop and mobile menu links
         const allNavLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
         allNavLinks.forEach(link => {
             link.classList.remove('text-blue-600', 'dark:text-blue-400');
@@ -219,7 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
     calculateExperience();
     setInterval(calculateExperience, 24 * 60 * 60 * 1000);
 
-    // Experience rendering function
     function renderExperience() {
         const loadingElement = document.getElementById('experience-loading');
         const experienceContainer = document.querySelector('#experience .space-y-8');
@@ -230,7 +226,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (experienceContainer) {
-                // Hide loading state
                 if (loadingElement) {
                     loadingElement.style.display = 'none';
                 }
@@ -261,7 +256,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('Error rendering experience data:', error);
-            // Show error state
             if (experienceContainer) {
                 if (loadingElement) {
                     loadingElement.style.display = 'none';
@@ -276,6 +270,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Call the renderExperience function after a small delay to ensure the data is loaded
     setTimeout(renderExperience, 100);
 });
