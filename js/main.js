@@ -19,11 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
             mobileMenuContent.classList.remove('-translate-y-full');
             document.body.style.overflow = 'hidden';
+            // Adjust menu height to viewport
+            mobileMenu.style.height = `${window.innerHeight - 64}px`; // 64px is navbar height
         } else {
             // Hide menu
             mobileMenu.classList.add('opacity-0', 'pointer-events-none');
             mobileMenuContent.classList.add('-translate-y-full');
             document.body.style.overflow = '';
+            mobileMenu.style.height = '';
         }
     }
 
@@ -59,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1
+        threshold: 0.15  // Increased threshold for smoother reveal
     };
 
     const scrollRevealObserver = new IntersectionObserver((entries) => {
@@ -84,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Improved intersection observer for nav highlighting
     const navObserverOptions = {
         root: null,
-        rootMargin: '-20% 0px -70% 0px', // Adjust these values to control when the active state changes
-        threshold: 0
+        rootMargin: '-10% 0px -80% 0px', // Adjusted margins for better accuracy
+        threshold: [0, 0.25, 0.5, 0.75, 1] // Multiple thresholds for smoother transitions
     };
 
     const navObserver = new IntersectionObserver((entries) => {
@@ -115,15 +118,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle initial active state
     function setInitialActiveState() {
-        const scrollPosition = window.scrollY;
+        const scrollPosition = window.scrollY + window.innerHeight / 3; // Adjusted scroll position calculation
         let activeSection = sections[0];
 
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             
-            if (scrollPosition >= sectionTop - window.innerHeight/2 && 
-                scrollPosition < sectionTop + sectionHeight - window.innerHeight/2) {
+            if (scrollPosition >= sectionTop && 
+                scrollPosition < sectionTop + sectionHeight) {
                 activeSection = section;
             }
         });
@@ -142,4 +145,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set initial active state and handle page refresh
     setInitialActiveState();
     window.addEventListener('load', setInitialActiveState);
+
+    // Add resize event listener for mobile menu height adjustment
+    window.addEventListener('resize', () => {
+        if (!mobileMenu.classList.contains('pointer-events-none')) {
+            mobileMenu.style.height = `${window.innerHeight - 64}px`;
+        }
+    });
 });
