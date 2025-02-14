@@ -185,4 +185,35 @@ document.addEventListener('DOMContentLoaded', function() {
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
+
+    // Calculate total experience
+    function calculateExperience() {
+        const startDate = new Date('2022-08-10');
+        const currentDate = new Date();
+        
+        let years = currentDate.getFullYear() - startDate.getFullYear();
+        let months = currentDate.getMonth() - startDate.getMonth();
+        let days = currentDate.getDate() - startDate.getDate();
+
+        if (days < 0) {
+            months--;
+            // Get the last day of the previous month
+            const lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+            days += lastMonth.getDate();
+        }
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        const experienceElement = document.getElementById('total-experience');
+        if (experienceElement) {
+            experienceElement.textContent = `${years} Years ${months} Months ${days} Days`;
+        }
+    }
+
+    calculateExperience();
+    // Update experience every day at midnight
+    setInterval(calculateExperience, 24 * 60 * 60 * 1000);
 });
