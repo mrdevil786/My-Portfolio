@@ -112,7 +112,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Suhail Saeed Usmani - [suhailsaeedme@gmail.com](mailto:suhailsaeedme@gmail.com)
 
-Project Link: [https://github.com/yourusername/portfolio](https://github.com/yourusername/portfolio)
+Project Link: [https://github.com/mrdevil786/portfolio](https://github.com/mrdevil786/portfolio)
 
 ## Acknowledgments
 
