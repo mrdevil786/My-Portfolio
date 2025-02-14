@@ -270,5 +270,60 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    setTimeout(renderExperience, 100);
+    function renderSkills() {
+        const loadingElement = document.getElementById('skills-loading');
+        const skillsContainer = document.querySelector('#skills .grid');
+        
+        try {
+            if (!window.skillsData) {
+                throw new Error('Skills data not found');
+            }
+
+            if (skillsContainer) {
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
+
+                skillsContainer.innerHTML = window.skillsData.skills.map(skill => `
+                    <div class="group relative bg-white dark:bg-dark-bg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 dark:border-gray-700">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300"></div>
+                        <div class="relative">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-${skill.icon} text-blue-600 dark:text-blue-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">${skill.category}</h3>
+                            <ul class="space-y-3">
+                                ${skill.items.map(item => `
+                                    <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                        <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        ${item}
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        } catch (error) {
+            console.error('Error rendering skills data:', error);
+            if (skillsContainer) {
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
+                skillsContainer.innerHTML = `
+                    <div class="text-center text-red-600 dark:text-red-400 col-span-full">
+                        <i class="fas fa-exclamation-circle text-2xl"></i>
+                        <p class="mt-2">Failed to load skills data. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    setTimeout(() => {
+        renderExperience();
+        renderSkills();
+    }, 100);
 });
