@@ -28,10 +28,14 @@
                     <a href="#contact" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300">Contact</a>
                 </div>
                 <div class="md:hidden flex items-center">
-                    <button id="menu-btn" class="text-gray-600 hover:text-gray-900">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
+                    <button id="menu-btn" class="relative w-8 h-8 text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <span class="sr-only">Toggle navigation menu</span>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6">
+                            <!-- Hamburger/X Lines -->
+                            <span class="block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out origin-center -translate-y-1.5"></span>
+                            <span class="block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out"></span>
+                            <span class="block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out origin-center translate-y-1.5"></span>
+                        </div>
                     </button>
                 </div>
             </div>

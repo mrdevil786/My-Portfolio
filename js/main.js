@@ -13,21 +13,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function toggleMenu() {
         const isHidden = mobileMenu.classList.contains('pointer-events-none');
+        const spans = menuBtn.querySelectorAll('span:not(.sr-only)');
         
         if (isHidden) {
             // Show menu
             mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
             mobileMenuContent.classList.remove('-translate-y-full');
             document.body.style.overflow = 'hidden';
-            // Add blur effect to content behind menu
             document.querySelector('main')?.classList.add('blur-sm');
+            
+            // Animate to X
+            spans[0].classList.add('rotate-45', 'translate-y-0');
+            spans[1].classList.add('opacity-0');
+            spans[2].classList.add('-rotate-45', 'translate-y-0');
+            
+            // Add active state
+            menuBtn.classList.add('text-blue-600');
         } else {
             // Hide menu
             mobileMenu.classList.add('opacity-0', 'pointer-events-none');
             mobileMenuContent.classList.add('-translate-y-full');
             document.body.style.overflow = '';
-            // Remove blur effect
             document.querySelector('main')?.classList.remove('blur-sm');
+            
+            // Animate back to hamburger
+            spans[0].classList.remove('rotate-45', 'translate-y-0');
+            spans[1].classList.remove('opacity-0');
+            spans[2].classList.remove('-rotate-45', 'translate-y-0');
+            
+            // Remove active state
+            menuBtn.classList.remove('text-blue-600');
         }
     }
 
