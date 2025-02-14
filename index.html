@@ -7,31 +7,54 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            bg: '#111827',
+                            card: '#1F2937',
+                            text: '#F9FAFB'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="js/main.js" defer></script>
 </head>
-<body class="bg-gray-50 antialiased">
+<body class="bg-gray-50 antialiased dark:bg-dark-bg dark:text-dark-text transition-colors duration-300">
     <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/70 shadow-sm translate-y-[-100%] transition-transform duration-500">
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-dark-card/80 backdrop-blur-md border-b border-gray-200/70 dark:border-gray-700/70 shadow-sm translate-y-[-100%] transition-transform duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="text-2xl font-bold text-gray-900">Suhail.dev</a>
+                    <a href="#" class="text-2xl font-bold text-gray-900 dark:text-white">Suhail.dev</a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">About</a>
-                    <a href="#skills" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Skills</a>
-                    <a href="#experience" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Experience</a>
-                    <a href="#projects" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Projects</a>
+                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">About</a>
+                    <a href="#skills" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">Skills</a>
+                    <a href="#experience" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">Experience</a>
+                    <a href="#projects" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300">Projects</a>
+                    <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                        <i class="fas fa-sun dark:hidden"></i>
+                        <i class="fas fa-moon hidden dark:block"></i>
+                    </button>
                     <a href="#contact" class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300">Contact</a>
                 </div>
-                <div class="md:hidden flex items-center">
-                    <button id="menu-btn" class="relative w-8 h-8 text-gray-600 hover:text-gray-900 focus:outline-none">
+                <div class="md:hidden flex items-center space-x-4">
+                    <button id="theme-toggle-mobile" class="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                        <i class="fas fa-sun dark:hidden"></i>
+                        <i class="fas fa-moon hidden dark:block"></i>
+                    </button>
+                    <button id="menu-btn" class="relative w-8 h-8 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none">
                         <span class="sr-only">Toggle navigation menu</span>
                         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6">
-                            <!-- Hamburger/X Lines -->
                             <span class="block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out origin-center -translate-y-1.5"></span>
                             <span class="block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out"></span>
                             <span class="block absolute h-0.5 w-6 bg-current transform transition duration-300 ease-in-out origin-center translate-y-1.5"></span>
@@ -44,13 +67,13 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-x-0 top-16 z-40 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="w-full bg-white/80 backdrop-blur-md shadow-md transform -translate-y-full transition-transform duration-300">
+        <div class="w-full bg-white/80 dark:bg-dark-card/80 backdrop-blur-md shadow-md transform -translate-y-full transition-transform duration-300">
             <div class="p-6 max-w-7xl mx-auto">
                 <div class="flex flex-col space-y-6">
-                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition-colors duration-300 text-lg">About</a>
-                    <a href="#skills" class="text-gray-600 hover:text-blue-600 transition-colors duration-300 text-lg">Skills</a>
-                    <a href="#experience" class="text-gray-600 hover:text-blue-600 transition-colors duration-300 text-lg">Experience</a>
-                    <a href="#projects" class="text-gray-600 hover:text-blue-600 transition-colors duration-300 text-lg">Projects</a>
+                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 text-lg">About</a>
+                    <a href="#skills" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 text-lg">Skills</a>
+                    <a href="#experience" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 text-lg">Experience</a>
+                    <a href="#projects" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 text-lg">Projects</a>
                     <a href="#contact" class="w-full px-4 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300 text-center text-lg">Contact</a>
                 </div>
             </div>
@@ -63,11 +86,11 @@
             <div class="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
                 <div class="col-span-7 space-y-8">
                     <div class="space-y-4">
-                        <span class="inline-block px-3 py-1 text-sm font-semibold text-blue-600 bg-blue-100 rounded-full">Full Stack Developer</span>
-                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900">
+                        <span class="inline-block px-3 py-1 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">Full Stack Developer</span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
                             Building digital experiences that matter
                         </h1>
-                        <p class="text-lg sm:text-xl text-gray-600">
+                        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300">
                             Crafting elegant solutions with Laravel, Vue.js, and modern web technologies
                         </p>
                     </div>
@@ -78,7 +101,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                             </svg>
                         </a>
-                        <a href="#projects" class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-blue-600 text-blue-600 hover:bg-blue-50 transition-colors duration-300">
+                        <a href="#projects" class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors duration-300">
                             View Projects
                         </a>
                     </div>
@@ -96,42 +119,42 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-16 lg:py-24 bg-white">
+    <section id="skills" class="py-16 lg:py-24 bg-white dark:bg-dark-card">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Skills & Expertise</h2>
-                <p class="mt-4 text-lg text-gray-600">Technologies and tools I work with</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Skills & Expertise</h2>
+                <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">Technologies and tools I work with</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Frontend Card -->
-                <div class="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+                <div class="group relative bg-white dark:bg-dark-bg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 dark:border-gray-700">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300"></div>
                     <div class="relative">
-                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-code text-blue-600 text-xl"></i>
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-code text-blue-600 dark:text-blue-400 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Frontend</h3>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Frontend</h3>
                         <ul class="space-y-3">
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Vue.js
                             </li>
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 JavaScript
                             </li>
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 jQuery
                             </li>
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Tailwind CSS
@@ -141,34 +164,34 @@
                 </div>
 
                 <!-- Backend Card -->
-                <div class="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+                <div class="group relative bg-white dark:bg-dark-bg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 dark:border-gray-700">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300"></div>
                     <div class="relative">
-                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-server text-blue-600 text-xl"></i>
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-server text-blue-600 dark:text-blue-400 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Backend</h3>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Backend</h3>
                         <ul class="space-y-3">
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Laravel
                             </li>
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 REST API
                             </li>
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 SQL
                             </li>
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 PHP
@@ -178,34 +201,34 @@
                 </div>
 
                 <!-- Other Skills Card -->
-                <div class="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100">
+                <div class="group relative bg-white dark:bg-dark-bg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 dark:border-gray-700">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300"></div>
                     <div class="relative">
-                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-tools text-blue-600 text-xl"></i>
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-tools text-blue-600 dark:text-blue-400 text-xl"></i>
                         </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-4">Other</h3>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Other</h3>
                         <ul class="space-y-3">
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 WordPress
                             </li>
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Git
                             </li>
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Inertia.js
                             </li>
-                            <li class="flex items-center text-gray-600">
-                                <svg class="h-5 w-5 text-blue-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <li class="flex items-center text-gray-600 dark:text-gray-300">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Agile/Scrum
@@ -218,87 +241,87 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-16 lg:py-24 bg-gray-50">
+    <section id="experience" class="py-16 lg:py-24 bg-gray-50 dark:bg-dark-bg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Professional Experience</h2>
-                <p class="mt-4 text-lg text-gray-600">My journey in web development</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Professional Experience</h2>
+                <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">My journey in web development</p>
             </div>
             <div class="space-y-8">
                 <!-- Experience Cards -->
-                <div class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 border border-gray-100">
+                <div class="group bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 border border-gray-100 dark:border-gray-700">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div class="mb-4 md:mb-0">
-                            <h3 class="text-xl font-semibold text-gray-900">Codenia Technologies LLP</h3>
-                            <p class="text-blue-600">Full Stack Developer</p>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Codenia Technologies LLP</h3>
+                            <p class="text-blue-600 dark:text-blue-400">Full Stack Developer</p>
                         </div>
-                        <span class="inline-block px-3 py-1 text-sm font-semibold text-gray-600 bg-gray-100 rounded-full">2022 - Present</span>
+                        <span class="inline-block px-3 py-1 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full">2022 - Present</span>
                     </div>
                     <div class="mt-4">
                         <ul class="space-y-2">
                             <li class="flex items-start">
-                                <svg class="h-5 w-5 text-blue-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span class="text-gray-600">Developed and maintained web applications using Laravel and Vue.js</span>
+                                <span class="text-gray-600 dark:text-gray-300">Developed and maintained web applications using Laravel and Vue.js</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="h-5 w-5 text-blue-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span class="text-gray-600">Implemented RESTful APIs and integrated third-party services</span>
+                                <span class="text-gray-600 dark:text-gray-300">Implemented RESTful APIs and integrated third-party services</span>
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 border border-gray-100">
+                <div class="group bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 border border-gray-100 dark:border-gray-700">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div class="mb-4 md:mb-0">
-                            <h3 class="text-xl font-semibold text-gray-900">Appdid Infotech LLP</h3>
-                            <p class="text-blue-600">Web Developer</p>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Appdid Infotech LLP</h3>
+                            <p class="text-blue-600 dark:text-blue-400">Web Developer</p>
                         </div>
-                        <span class="inline-block px-3 py-1 text-sm font-semibold text-gray-600 bg-gray-100 rounded-full">2021 - 2022</span>
+                        <span class="inline-block px-3 py-1 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full">2021 - 2022</span>
                     </div>
                     <div class="mt-4">
                         <ul class="space-y-2">
                             <li class="flex items-start">
-                                <svg class="h-5 w-5 text-blue-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span class="text-gray-600">Created custom WordPress themes and plugins</span>
+                                <span class="text-gray-600 dark:text-gray-300">Created custom WordPress themes and plugins</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="h-5 w-5 text-blue-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span class="text-gray-600">Optimized website performance and user experience</span>
+                                <span class="text-gray-600 dark:text-gray-300">Optimized website performance and user experience</span>
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 border border-gray-100">
+                <div class="group bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 border border-gray-100 dark:border-gray-700">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div class="mb-4 md:mb-0">
-                            <h3 class="text-xl font-semibold text-gray-900">Aeonaxis Softech (P) Ltd</h3>
-                            <p class="text-blue-600">Junior Developer</p>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Aeonaxis Softech (P) Ltd</h3>
+                            <p class="text-blue-600 dark:text-blue-400">Junior Developer</p>
                         </div>
-                        <span class="inline-block px-3 py-1 text-sm font-semibold text-gray-600 bg-gray-100 rounded-full">2020 - 2021</span>
+                        <span class="inline-block px-3 py-1 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full">2020 - 2021</span>
                     </div>
                     <div class="mt-4">
                         <ul class="space-y-2">
                             <li class="flex items-start">
-                                <svg class="h-5 w-5 text-blue-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span class="text-gray-600">Assisted in frontend development using JavaScript and jQuery</span>
+                                <span class="text-gray-600 dark:text-gray-300">Assisted in frontend development using JavaScript and jQuery</span>
                             </li>
                             <li class="flex items-start">
-                                <svg class="h-5 w-5 text-blue-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                <span class="text-gray-600">Collaborated with team members on various projects</span>
+                                <span class="text-gray-600 dark:text-gray-300">Collaborated with team members on various projects</span>
                             </li>
                         </ul>
                     </div>
@@ -308,58 +331,58 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-16 lg:py-24 bg-white">
+    <section id="projects" class="py-16 lg:py-24 bg-white dark:bg-dark-card">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Featured Projects</h2>
-                <p class="mt-4 text-lg text-gray-600">Some of my recent work</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Featured Projects</h2>
+                <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">Some of my recent work</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project Cards -->
-                <div class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div class="group bg-white dark:bg-dark-bg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="relative">
                         <img src="https://picsum.photos/seed/project1/400/300" alt="SR Hirings" class="w-full h-48 object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">SR Hirings</h3>
-                        <p class="mt-2 text-gray-600">A comprehensive hiring platform built with Laravel and Vue.js</p>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">SR Hirings</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">A comprehensive hiring platform built with Laravel and Vue.js</p>
                         <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">Laravel</span>
-                            <span class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">Vue.js</span>
-                            <span class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">MySQL</span>
+                            <span class="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">Laravel</span>
+                            <span class="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">Vue.js</span>
+                            <span class="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">MySQL</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div class="group bg-white dark:bg-dark-bg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="relative">
                         <img src="https://picsum.photos/seed/project2/400/300" alt="That's Write!" class="w-full h-48 object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">That's Write!</h3>
-                        <p class="mt-2 text-gray-600">Content management system with advanced editing features</p>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">That's Write!</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">Content management system with advanced editing features</p>
                         <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">WordPress</span>
-                            <span class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">PHP</span>
-                            <span class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">jQuery</span>
+                            <span class="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">WordPress</span>
+                            <span class="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">PHP</span>
+                            <span class="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">jQuery</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                <div class="group bg-white dark:bg-dark-bg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                     <div class="relative">
                         <img src="https://picsum.photos/seed/project3/400/300" alt="Youth Power Foundation" class="w-full h-48 object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900">Youth Power Foundation</h3>
-                        <p class="mt-2 text-gray-600">Non-profit organization website with donation integration</p>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Youth Power Foundation</h3>
+                        <p class="mt-2 text-gray-600 dark:text-gray-300">Non-profit organization website with donation integration</p>
                         <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">Laravel</span>
-                            <span class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">Stripe</span>
-                            <span class="px-3 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">Tailwind</span>
+                            <span class="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">Laravel</span>
+                            <span class="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">Stripe</span>
+                            <span class="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full">Tailwind</span>
                         </div>
                     </div>
                 </div>
@@ -368,59 +391,59 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 lg:py-24 bg-gray-50">
+    <section id="contact" class="py-16 lg:py-24 bg-gray-50 dark:bg-dark-bg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900">Get in Touch</h2>
-                <p class="mt-4 text-lg text-gray-600">Let's work together</p>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">Get in Touch</h2>
+                <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">Let's work together</p>
             </div>
             <div class="max-w-2xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-6">
-                        <a href="mailto:suhailsaeedme@gmail.com" class="group flex items-center p-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-envelope text-blue-600 text-xl"></i>
+                        <a href="mailto:suhailsaeedme@gmail.com" class="group flex items-center p-4 bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-envelope text-blue-600 dark:text-blue-400 text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-sm font-medium text-gray-500">Email</h3>
-                                <p class="text-base font-medium text-gray-900 group-hover:text-blue-600">suhailsaeedme@gmail.com</p>
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Email</h3>
+                                <p class="text-base font-medium text-gray-900 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">suhailsaeedme@gmail.com</p>
                             </div>
                         </a>
-                        <a href="tel:+917860078253" class="group flex items-center p-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-phone text-blue-600 text-xl"></i>
+                        <a href="tel:+917860078253" class="group flex items-center p-4 bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-phone text-blue-600 dark:text-blue-400 text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h3 class="text-sm font-medium text-gray-500">Phone</h3>
-                                <p class="text-base font-medium text-gray-900 group-hover:text-blue-600">+91-7860078253</p>
+                                <h3 class="text-sm font-medium text-gray-500 dark:text-gray-400">Phone</h3>
+                                <p class="text-base font-medium text-gray-900 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">+91-7860078253</p>
                             </div>
                         </a>
                     </div>
                     <div class="space-y-6">
                         <div class="grid grid-cols-2 gap-4">
-                            <a href="https://linkedin.com/in/suhailsaeedusmani" target="_blank" class="group flex flex-col items-center p-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
-                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-2">
-                                    <i class="fab fa-linkedin-in text-blue-600 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                            <a href="https://linkedin.com/in/suhailsaeedusmani" target="_blank" class="group flex flex-col items-center p-4 bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-2">
+                                    <i class="fab fa-linkedin-in text-blue-600 dark:text-blue-400 text-xl group-hover:scale-110 transition-transform duration-300"></i>
                                 </div>
-                                <span class="text-sm font-medium text-gray-900">LinkedIn</span>
+                                <span class="text-sm font-medium text-gray-900 dark:text-gray-300">LinkedIn</span>
                             </a>
-                            <a href="https://github.com/mrdevil786" target="_blank" class="group flex flex-col items-center p-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
-                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-2">
-                                    <i class="fab fa-github text-blue-600 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                            <a href="https://github.com/mrdevil786" target="_blank" class="group flex flex-col items-center p-4 bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-2">
+                                    <i class="fab fa-github text-blue-600 dark:text-blue-400 text-xl group-hover:scale-110 transition-transform duration-300"></i>
                                 </div>
-                                <span class="text-sm font-medium text-gray-900">GitHub</span>
+                                <span class="text-sm font-medium text-gray-900 dark:text-gray-300">GitHub</span>
                             </a>
-                            <a href="https://suhailusmani.cf" target="_blank" class="group flex flex-col items-center p-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
-                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-2">
-                                    <i class="fas fa-globe text-blue-600 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                            <a href="https://suhailusmani.cf" target="_blank" class="group flex flex-col items-center p-4 bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-2">
+                                    <i class="fas fa-globe text-blue-600 dark:text-blue-400 text-xl group-hover:scale-110 transition-transform duration-300"></i>
                                 </div>
-                                <span class="text-sm font-medium text-gray-900">Website</span>
+                                <span class="text-sm font-medium text-gray-900 dark:text-gray-300">Website</span>
                             </a>
-                            <a href="skype:join.skype.com" target="_blank" class="group flex flex-col items-center p-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
-                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-2">
-                                    <i class="fab fa-skype text-blue-600 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                            <a href="skype:join.skype.com" target="_blank" class="group flex flex-col items-center p-4 bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+                                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-2">
+                                    <i class="fab fa-skype text-blue-600 dark:text-blue-400 text-xl group-hover:scale-110 transition-transform duration-300"></i>
                                 </div>
-                                <span class="text-sm font-medium text-gray-900">Skype</span>
+                                <span class="text-sm font-medium text-gray-900 dark:text-gray-300">Skype</span>
                             </a>
                         </div>
                     </div>
@@ -430,7 +453,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gray-900 dark:bg-black text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
