@@ -186,7 +186,6 @@ document.addEventListener('DOMContentLoaded', function() {
         yearElement.textContent = new Date().getFullYear();
     }
 
-    // Calculate total experience
     function calculateExperience() {
         const startDate = new Date('2022-08-10');
         const currentDate = new Date();
@@ -197,7 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (days < 0) {
             months--;
-            // Get the last day of the previous month
             const lastMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
             days += lastMonth.getDate();
         }
@@ -214,6 +212,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     calculateExperience();
-    // Update experience every day at midnight
     setInterval(calculateExperience, 24 * 60 * 60 * 1000);
 });
