@@ -213,4 +213,64 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calculateExperience();
     setInterval(calculateExperience, 24 * 60 * 60 * 1000);
+
+    // Experience rendering function
+    function renderExperience() {
+        const loadingElement = document.getElementById('experience-loading');
+        const experienceContainer = document.querySelector('#experience .space-y-8');
+        
+        try {
+            if (!window.experienceData) {
+                throw new Error('Experience data not found');
+            }
+
+            if (experienceContainer) {
+                // Hide loading state
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
+
+                experienceContainer.innerHTML = window.experienceData.experiences.map(exp => `
+                    <div class="group bg-white dark:bg-dark-card rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-8 border border-gray-100 dark:border-gray-700">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                            <div class="mb-4 md:mb-0">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">${exp.company}</h3>
+                                <p class="text-blue-600 dark:text-blue-400">${exp.position}</p>
+                            </div>
+                            <span class="inline-block px-3 py-1 text-sm font-semibold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full">${exp.period}</span>
+                        </div>
+                        <div class="mt-4">
+                            <ul class="space-y-2">
+                                ${exp.responsibilities.map(resp => `
+                                    <li class="flex items-start">
+                                        <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                        <span class="text-gray-600 dark:text-gray-300">${resp}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        } catch (error) {
+            console.error('Error rendering experience data:', error);
+            // Show error state
+            if (experienceContainer) {
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
+                experienceContainer.innerHTML = `
+                    <div class="text-center text-red-600 dark:text-red-400">
+                        <i class="fas fa-exclamation-circle text-2xl"></i>
+                        <p class="mt-2">Failed to load experience data. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    // Call the renderExperience function after a small delay to ensure the data is loaded
+    setTimeout(renderExperience, 100);
 });
