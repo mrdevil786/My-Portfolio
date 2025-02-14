@@ -17,7 +17,7 @@ window.skillsData = {
             "items": [
                 "Laravel",
                 "REST API",
-                "SQL",
+                "MySql",
                 "PHP"
             ]
         },
@@ -25,7 +25,7 @@ window.skillsData = {
             "category": "Other",
             "icon": "tools",
             "items": [
-                "WordPress",
+                "Docker",
                 "Git",
                 "Inertia.js",
                 "AWS/CPanel Hosting"
