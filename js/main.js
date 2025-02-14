@@ -118,17 +118,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const navObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                navLinks.forEach(link => {
-                    link.classList.remove('text-blue-600');
-                    link.classList.add('text-gray-600');
+                // Update both desktop and mobile menu links
+                const allNavLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
+                allNavLinks.forEach(link => {
+                    link.classList.remove('text-blue-600', 'dark:text-blue-400');
+                    link.classList.add('text-gray-600', 'dark:text-gray-300');
                 });
 
                 const activeId = entry.target.id;
-                const activeLink = document.querySelector(`nav a[href="#${activeId}"]`);
-                if (activeLink) {
-                    activeLink.classList.remove('text-gray-600');
-                    activeLink.classList.add('text-blue-600');
-                }
+                // Select links in both desktop and mobile menu
+                const activeLinks = document.querySelectorAll(`nav a[href="#${activeId}"], #mobile-menu a[href="#${activeId}"]`);
+                activeLinks.forEach(activeLink => {
+                    activeLink.classList.remove('text-gray-600', 'dark:text-gray-300');
+                    activeLink.classList.add('text-blue-600', 'dark:text-blue-400');
+                });
             }
         });
     }, navObserverOptions);
@@ -151,13 +154,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        navLinks.forEach(link => {
-            link.classList.remove('text-blue-600');
-            link.classList.add('text-gray-600');
+        // Update both desktop and mobile menu links
+        const allNavLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
+        allNavLinks.forEach(link => {
+            link.classList.remove('text-blue-600', 'dark:text-blue-400');
+            link.classList.add('text-gray-600', 'dark:text-gray-300');
             
             if (link.getAttribute('href') === `#${activeSection.id}`) {
-                link.classList.remove('text-gray-600');
-                link.classList.add('text-blue-600');
+                link.classList.remove('text-gray-600', 'dark:text-gray-300');
+                link.classList.add('text-blue-600', 'dark:text-blue-400');
             }
         });
     }
