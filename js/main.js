@@ -19,14 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenu.classList.remove('pointer-events-none', 'opacity-0');
             mobileMenuContent.classList.remove('-translate-y-full');
             document.body.style.overflow = 'hidden';
-            // Adjust menu height to viewport
-            mobileMenu.style.height = `${window.innerHeight - 64}px`; // 64px is navbar height
+            // Add blur effect to content behind menu
+            document.querySelector('main')?.classList.add('blur-sm');
         } else {
             // Hide menu
             mobileMenu.classList.add('opacity-0', 'pointer-events-none');
             mobileMenuContent.classList.add('-translate-y-full');
             document.body.style.overflow = '';
-            mobileMenu.style.height = '';
+            // Remove blur effect
+            document.querySelector('main')?.classList.remove('blur-sm');
         }
     }
 
@@ -151,5 +152,17 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!mobileMenu.classList.contains('pointer-events-none')) {
             mobileMenu.style.height = `${window.innerHeight - 64}px`;
         }
+    });
+
+    // Add smooth transition for menu items
+    document.querySelectorAll('#mobile-menu a').forEach((link, index) => {
+        link.style.transitionDelay = `${index * 50}ms`;
+        link.addEventListener('click', () => {
+            toggleMenu();
+            // Reset transition delay after animation
+            setTimeout(() => {
+                link.style.transitionDelay = '0ms';
+            }, 300);
+        });
     });
 });
