@@ -1,21 +1,67 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Typing animation for hero headline
+    const heroHeadline = document.querySelector('#hero-content h1');
+    if (heroHeadline) {
+        const originalText = heroHeadline.textContent;
+        heroHeadline.textContent = '';
+        
+        let i = 0;
+        const typingInterval = setInterval(() => {
+            if (i < originalText.length) {
+                heroHeadline.textContent += originalText.charAt(i);
+                i++;
+            } else {
+                clearInterval(typingInterval);
+                // Add blinking cursor after animation completes
+                heroHeadline.innerHTML += '<span class="typing-cursor">|</span>';
+            }
+        }, 100);
+    }
+
     const themeToggle = document.getElementById('theme-toggle');
     const themeToggleMobile = document.getElementById('theme-toggle-mobile');
     
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    // Set initial theme and aria-pressed state
+    const isDarkMode = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (isDarkMode) {
         document.documentElement.classList.add('dark');
+        document.querySelectorAll('[aria-label="Toggle dark mode"]').forEach(btn => {
+            btn.setAttribute('aria-pressed', 'true');
+        });
     } else {
         document.documentElement.classList.remove('dark');
+        document.querySelectorAll('[aria-label="Toggle dark mode"]').forEach(btn => {
+            btn.setAttribute('aria-pressed', 'false');
+        });
     }
 
     function toggleTheme() {
-        if (document.documentElement.classList.contains('dark')) {
-            document.documentElement.classList.remove('dark');
+        const html = document.documentElement;
+        const isDark = html.classList.contains('dark');
+        
+        // Add transition class for smooth color changes
+        html.classList.add('transition-all');
+        html.classList.add('duration-500');
+        
+        // Toggle dark mode and update aria-pressed state
+        if (isDark) {
+            html.classList.remove('dark');
             localStorage.theme = 'light';
+            document.querySelectorAll('[aria-label="Toggle dark mode"]').forEach(btn => {
+                btn.setAttribute('aria-pressed', 'false');
+            });
         } else {
-            document.documentElement.classList.add('dark');
+            html.classList.add('dark');
             localStorage.theme = 'dark';
+            document.querySelectorAll('[aria-label="Toggle dark mode"]').forEach(btn => {
+                btn.setAttribute('aria-pressed', 'true');
+            });
         }
+        
+        // Remove transition classes after animation completes
+        setTimeout(() => {
+            html.classList.remove('transition-all', 'duration-500');
+        }, 500);
     }
 
     themeToggle?.addEventListener('click', toggleTheme);
@@ -45,6 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
             spans[2].classList.add('-rotate-45', 'translate-y-0');
             
             menuBtn.classList.add('text-blue-600');
+            menuBtn.setAttribute('aria-expanded', 'true');
+            mobileMenu.setAttribute('aria-hidden', 'false');
         } else {
             mobileMenu.classList.add('opacity-0', 'pointer-events-none');
             mobileMenuContent.classList.add('-translate-y-full');
@@ -56,6 +104,8 @@ document.addEventListener('DOMContentLoaded', function() {
             spans[2].classList.remove('-rotate-45', 'translate-y-0');
             
             menuBtn.classList.remove('text-blue-600');
+            menuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenu.setAttribute('aria-hidden', 'true');
         }
     }
 
@@ -85,24 +135,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
-
     const scrollRevealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('opacity-100', 'translate-y-0');
-                entry.target.classList.remove('opacity-0', 'translate-y-8');
-                scrollRevealObserver.unobserve(entry.target);
+                // Add staggered delay based on index
+                const delay = Math.min(index * 100, 800);
+                
+                setTimeout(() => {
+                    entry.target.classList.add(
+                        'opacity-100',
+                        'translate-y-0',
+                        'blur-none'
+                    );
+                    entry.target.classList.remove(
+                        'opacity-0',
+                        'translate-y-8',
+                        'blur-sm'
+                    );
+                    scrollRevealObserver.unobserve(entry.target);
+                }, delay);
             }
         });
-    }, observerOptions);
+    }, {
+        root: null,
+        rootMargin: '0px 0px -100px 0px',
+        threshold: 0.05
+    });
 
-    document.querySelectorAll('.scroll-reveal').forEach(el => {
-        el.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
+    document.querySelectorAll('.scroll-reveal').forEach((el, index) => {
+        // Add staggered initial styles
+        el.classList.add(
+            'opacity-0',
+            'translate-y-8',
+            'blur-sm',
+            'transition-all',
+            'duration-700',
+            'ease-out'
+        );
+        
+        // Set custom delay property for CSS
+        el.style.setProperty('--delay', `${Math.min(index * 50, 500)}ms`);
         scrollRevealObserver.observe(el);
     });
 
@@ -272,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderSkills() {
         const loadingElement = document.getElementById('skills-loading');
-        const skillsContainer = document.querySelector('#skills .grid');
+        const skillsContainer = document.getElementById('skills-container');
         
         try {
             if (!window.skillsData) {
@@ -285,26 +357,72 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 skillsContainer.innerHTML = window.skillsData.skills.map(skill => `
-                    <div class="group relative bg-white dark:bg-dark-bg rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 dark:border-gray-700">
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300"></div>
-                        <div class="relative">
-                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4">
+                    <div class="skill-card bg-white dark:bg-dark-bg rounded-xl shadow-md p-6 border border-gray-100 dark:border-gray-700" data-category="${skill.category.toLowerCase()}">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mr-4">
                                 <i class="fas fa-${skill.icon} text-blue-600 dark:text-blue-400 text-xl"></i>
                             </div>
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">${skill.category}</h3>
-                            <ul class="space-y-3">
-                                ${skill.items.map(item => `
-                                    <li class="flex items-center text-gray-600 dark:text-gray-300">
-                                        <svg class="h-5 w-5 text-blue-600 dark:text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                        ${item}
-                                    </li>
-                                `).join('')}
-                            </ul>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">${skill.category}</h3>
+                        </div>
+                        <div class="space-y-4">
+                            ${skill.items.map(item => `
+                                <div class="has-tooltip relative">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="text-gray-600 dark:text-gray-300">${item.name}</span>
+                                        <span class="text-sm font-medium text-blue-600 dark:text-blue-400">${item.proficiency}%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                        <div class="skill-bar bg-blue-600 dark:bg-blue-400 h-2 rounded-full"
+                                             style="width: ${item.proficiency}%"></div>
+                                    </div>
+                                    <div class="tooltip absolute z-10 w-64 p-3 mt-2 text-sm text-white bg-gray-800 dark:bg-gray-900 rounded-lg shadow-lg">
+                                        ${item.description}
+                                    </div>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
                 `).join('');
+
+                // Add filter functionality
+                document.querySelectorAll('.skill-filter').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const filter = this.dataset.filter;
+                        
+                        // Update active button
+                        document.querySelectorAll('.skill-filter').forEach(btn => {
+                            btn.classList.remove('bg-blue-100', 'dark:bg-blue-900/30', 'text-blue-600', 'dark:text-blue-400');
+                            btn.classList.add('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300');
+                        });
+                        this.classList.add('bg-blue-100', 'dark:bg-blue-900/30', 'text-blue-600', 'dark:text-blue-400');
+                        this.classList.remove('bg-gray-100', 'dark:bg-gray-700', 'text-gray-600', 'dark:text-gray-300');
+
+                        // Filter skills
+                        document.querySelectorAll('.skill-card').forEach(card => {
+                            if (filter === 'all' || card.dataset.category === filter) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        });
+                    });
+                });
+
+                // Animate skill bars on scroll
+                const skillBars = document.querySelectorAll('.skill-bar');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const width = entry.target.style.width;
+                            entry.target.style.width = '0';
+                            setTimeout(() => {
+                                entry.target.style.width = width;
+                            }, 100);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                skillBars.forEach(bar => observer.observe(bar));
             }
         } catch (error) {
             console.error('Error rendering skills data:', error);
@@ -320,6 +438,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
             }
         }
+    }
+
+    // Critical image lazy loading with intersection observer
+    const heroImage = document.querySelector('#about img');
+    if (heroImage) {
+        const imgObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        imgObserver.unobserve(img);
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Store original src in data-src and remove src
+        heroImage.dataset.src = heroImage.src;
+        heroImage.src = '';
+        imgObserver.observe(heroImage);
     }
 
     setTimeout(() => {
